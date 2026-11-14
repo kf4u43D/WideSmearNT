@@ -627,7 +627,7 @@ void testAdapterContract() {
     factory->calculateRequirements(requirements, nullptr);
     CHECK(test, requirements.numParameters == kNumParameters);
     CHECK(test, kParamInL == 0 && kParamFreq == 6 && kParamFb == 10);
-    CHECK(test, kParamStereoSpread == kLegacyParameterCount);
+    CHECK(test, static_cast<int>(kParamStereoSpread) == kLegacyParameterCount);
     CHECK(test, kParamRoute1Source == 32 && kRouteCount == 8 && kRouteStride == 3);
     CHECK(test, requirements.sram >= sizeof(_NT_algorithm));
     CHECK(test, requirements.dram == 0U);

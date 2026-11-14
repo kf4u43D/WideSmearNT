@@ -9,6 +9,19 @@ permissions:
   contents: read
 
 jobs:
+  native-linux:
+    name: Native GCC tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Release tests and strict core warnings
+        shell: pwsh
+        run: ./test.ps1 -Compiler g++ -WarningsAsErrors -StrictCore -OutDir ./build/native-gcc
+      - name: Address and undefined-behaviour sanitizers
+        shell: pwsh
+        run: ./test.ps1 -Compiler g++ -Sanitize -OutDir ./build/sanitizers-gcc
+
   native-windows:
     name: Native DSP and adapter
     runs-on: windows-2025
